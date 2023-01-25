@@ -7,5 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 
 public interface DishService extends IService<Dish> {
 
-    public void saveWithFlavor(DishDto dishDto);
+    void saveWithFlavor(DishDto dishDto);
+
+    DishDto getByIdWithFlavor(Long id);
+
+    void updateWithFlavor(DishDto dishDto);
 }
