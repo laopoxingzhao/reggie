@@ -27,16 +27,16 @@ public class CommonController {
 
     /**
      * 文件上传
-     * @param file
+     * @param multipartFile
      * @return
      */
     @PostMapping("/upload")
-    public R<String> upload(MultipartFile file){
+    public R<String> upload(@RequestPart("file") MultipartFile multipartFile){
         //file是一个临时文件，需要转存到指定位置，否则本次请求完成后临时文件会删除
-        log.info(file.toString());
+        log.info(multipartFile.toString());
 
         //原始文件名
-        String originalFilename = file.getOriginalFilename();//abc.jpg
+        String originalFilename = multipartFile.getOriginalFilename();//abc.jpg
         String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
 
         //使用UUID重新生成文件名，防止文件名称重复造成文件覆盖
@@ -52,7 +52,7 @@ public class CommonController {
 
         try {
             //将临时文件转存到指定位置
-            file.transferTo(new File(basePath + fileName));
+            multipartFile.transferTo(new File(basePath + fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }
