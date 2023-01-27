@@ -99,6 +99,7 @@ public class CategoryController {
         queryWrapper.orderByAsc(Category::getSort).orderByDesc(Category::getUpdateTime);
 
         List<Category> list = categoryService.list(queryWrapper);
+
         return R.success(list);
     }
 }
